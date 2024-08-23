@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Lights</title>
+<style>
+
+    #trafficLights{
+        width: 210px;
+        height: 700px;
+        background-color: black;
+        border-radius: 5em;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 15px;
+    }
+
+    .red{
+        background-color: red;
+        opacity: 10%;
+    }
+    .yellow{
+        background-color: yellow;
+        opacity: 10%;
+    }
+    .green{
+        background-color: green;
+        opacity: 10%;
+    }
+
+    .circle{
+        box-shadow: -5px 10px 20px 10px black inset;
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+    }
+
+    .active{
+        opacity: 100%;
+    }
+
+
+
+</style>
+
+</head>
+<body onload="lightTimer()">
+
+    <div id="trafficLights">
+        <div id="red" class="red circle"></div>
+        <div id="yellow" class="yellow circle"></div>
+        <div id="green" class="green circle"></div>
+    </div>
+
+    <button onclick="activeLight('green', 'yellow', 'red', 'red')">Red</button>
+    <button onclick="activeLight('green', 'green', 'red', 'yellow')">Red and yellow</button>
+    <button onclick="activeLight('red', 'yellow', 'green', 'green')">Green</button>
+    <button onclick="activeLight('red', 'green', 'yellow', 'yellow')">Yellow</button>
+
+    <script>
+        function lightTimer(){
+            setTimeout(activeRed, 1000);
+        }
+        function activeRed(){
+            activeLight('green', 'yellow', 'red', 'red');
+            setTimeout(activeRedAndYellow, 1000)
+        }
+
+        function activeRedAndYellow(){
+            activeLight('green', 'green', 'red', 'yellow')
+            setTimeout(activeGreen, 1000)
+        }
+
+        function activeGreen(){
+            activeLight('red', 'yellow', 'green', 'green');
+            setTimeout(activeYellow, 1000);
+        }
+
+        function activeYellow(){
+            activeLight('red', 'green', 'yellow', 'yellow');
+        }
+
+
+        function activeLight(redLight, redYellowLight, greenLight, yellowLight){
+            document.getElementById(redLight).classList.remove("active");
+            document.getElementById(redYellowLight).classList.remove("active");
+            document.getElementById(greenLight).classList.add("active");
+            document.getElementById(yellowLight).classList.add("active");
+        }
+
+
+
+    </script>
+    
+</body>
+</html>
